@@ -19,11 +19,8 @@ const computerPlay = function() {
 
 const singleRound = function(a) {
     const compPlay = computerPlay()
-    console.log('compPlay',compPlay)
-    console.log('playerPlay',a)
     switch(a.toLowerCase()) {
         case "rock":
-            console.log('Switch',a)
             if(compPlay === "Scissors"){
                 playerScore ++
                 // return `You win!! ${a.toUpperCase()} beats ${compPlay}`
