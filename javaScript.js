@@ -16,66 +16,57 @@ const computerPlay = function() {
     }
 }
 
-
 const singleRound = function(a) {
     const compPlay = computerPlay()
-    if(a == null) {
-        return
-    }
-    else {
+    
         switch(a.toLowerCase()) {
             case "rock":
                 if(compPlay == "Scissors"){
                     playerScore ++
-                    // return `You win!! ${a.toUpperCase()} beats ${compPlay}`
                     console.log(`You win!! ${a.toUpperCase()} beats ${compPlay}`)
                 }
                 else if(compPlay == "Paper") {
                     compScore ++
-                    // return `You Loose! ${compPlay} beats ${a.toUpperCase()}`
                     console.log(`You Loose! ${compPlay} beats ${a.toUpperCase()}`)
                 }
                 else {
                     drawGame ++
-                    // return `Draw, you chose ${a.toUpperCase()} and apponent chose ${compPlay}`
                     console.log(`Draw, you chose ${a.toUpperCase()} and apponent chose ${compPlay}`)
                 }
+                return true
                 break
             case "scissors":
                 if(compPlay == "Paper"){
                     playerScore ++
-                    // return `You Winn!! ${a.toUpperCase()} beats ${compPlay}`
                     console.log(`You Winn!! ${a.toUpperCase()} beats ${compPlay}`)
                 }
                 else if(compPlay === "Rock") {
                     compScore ++
-                    // return `You Loose! ${compPlay} beats ${a.toUpperCase()}`
                     console.log(`You Loose! ${compPlay} beats ${a.toUpperCase()}`)
                 }
                 else {
                     drawGame ++
-                    // return `Draw, you chose ${a.toUpperCase()} and apponent chose ${compPlay}`
                     console.log(`Draw, you chose ${a.toUpperCase()} and apponent chose ${compPlay}`)
                 }
+                return true
                 break;
             case "paper":
                 if(compPlay === "Rock"){
                     playerScore ++
-                    // return `You Win!! ${a.toUpperCase()} beats ${compPlay}` 
                     console.log(`You Win!! ${a.toUpperCase()} beats ${compPlay}` )
                 }
                 else if(compPlay === "Scissors") {
                     compScore ++
-                    // return `You Loose! ${compPlay} beats ${a.toUpperCase()}`
                     console.log(`You Loose! ${compPlay} beats ${a.toUpperCase()}`)
                 }
                 else {
                     drawGame ++
-                    // return `Draw, you chose ${a.toUpperCase()} and apponent chose ${compPlay}`
                     console.log(`Draw, you chose ${a.toUpperCase()} and apponent chose ${compPlay}`)
                 }
+                return true
                 break;
-        }
+            default:
+                break
     }
 }
 
@@ -83,19 +74,28 @@ const gamePlay = function() {
     
     compScore = 0
     playerScore = 0
+    drawGame = 0
 
-    for(let i = 0; i < 5; i ++) {
-        const round = i + 1
-        const selection = prompt(
-            `Make your selection: 
+    
+        for (let i = 0; i < 5; i++) {
+            const round = i + 1
+            const selection = prompt(
+                `Make your selection: 
             'Rock' || 'Paper' || 'Scissors' 
             ROUND ${round}
             Computer Score: ${compScore}
             Your Score: ${playerScore}
             Draw Games: ${drawGame}`,
             )
-        singleRound(selection)
-    }
+            // singleRound(selection)
+            if(singleRound(selection)) {
+                console.log('round played')
+            } else {
+                console.log('BAD')
+                i--
+            }
+        }
+        
 
     if(compScore > playerScore) {
         alert(`You loose ${compScore} to ${playerScore} - Better luck next time || number of draw points ${drawGame}`)
